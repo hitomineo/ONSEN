@@ -1,20 +1,20 @@
 class Public::CustomersController < ApplicationController
 
   def show
-    @customer = current_customer
-    # @customer = Customer.all
-
+       @customer = current_customer
   end
+
 
   def  update
-       @customer = Customer.find(params[:id])
-    if @customer.update(customer_params)
+       @customer = current_customer
+  if   @customer.update(customer_params)
        flash[:notice] = "You have updated user successfully."
        redirect_to customer_path(@customer.id)
-    else
+  else
        render :show
-    end
   end
+  end
+
 
 
   def quit
@@ -31,7 +31,7 @@ class Public::CustomersController < ApplicationController
 
   private
   def customer_params
-    params.require(:customer).permit(:name,:email,:image)
+    params.require(:customer).permit(:name,:email)
   end
 
 end

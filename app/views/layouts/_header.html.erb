@@ -18,7 +18,7 @@
     <div class="container mt-4 pt-4">
       <div class="justify-content-center pt-1">
         <%= image_tag 'kanjionsen.png', width: '20%', height: '20%' %>
-       
+
          <% if customer_signed_in? %>
           <nav class="navbar navbar-expand-sm navbar-light mt-4 float-right ">
               <ul class="navbar-nav">
@@ -29,14 +29,14 @@
                   <%=link_to "投稿一覧",posts_path, class: 'text-dark'  %>
                 </li>
                 <li class="nav-item active pr-4 pl-5">
-                   <%=link_to "投稿/編集",information_path, class: 'text-dark'  %>
+                   <%=link_to "投稿/編集",customer_path(current_customer), class: 'text-dark'  %>
                 </li>
                 <li class="nav-item active  pl-5">
                   <%=link_to "ログアウト",destroy_customer_session_path, class: 'text-dark', method: :delete %>
                 </li>
-              </ul> 
+              </ul>
              </nav>
-          
+
           <% else %>
             <nav class="navbar navbar-expand-sm navbar-light mt-4 float-right ">
               <ul class="navbar-nav">
@@ -49,11 +49,11 @@
                 <li class="nav-item active  pl-5">
                   <%= link_to "ONSENついて", new_customer_session_path,class: 'text-dark'  %>
                 </li>
-              </ul> 
+              </ul>
              </nav>
-          <% end %>  
+          <% end %>
       </div>
-    </div>  
+    </div>
 </header>
 
 

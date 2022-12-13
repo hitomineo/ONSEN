@@ -29,6 +29,10 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
+  end
 
 
     protected
@@ -42,7 +46,6 @@ class Public::SessionsController < Devise::SessionsController
      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == true)
        # 【処理内容3】
       redirect_to new_customer_registration_path, notice: "退会済みです"
-     else
      end
     end
 end

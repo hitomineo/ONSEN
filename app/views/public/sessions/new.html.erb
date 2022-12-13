@@ -1,7 +1,7 @@
 
 
-<%= form_with model: @customer, url: customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
- <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%#= form_with model: @customer, url: customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
+ <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
 
 <form class="bg-home d-flex align-items-center w-150 h-150">
@@ -29,9 +29,9 @@
             </div>
 
             <div class="text-center">
-                <%= f.submit "Log in", class: "btn  btn-outline-secondary" %><%end%>
+                <%= f.submit "Log in", class: "btn  btn-outline-secondary" %>
             </div>
-
+  <%end%>
 
           </div>
         </div>

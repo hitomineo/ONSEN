@@ -1,36 +1,35 @@
 
-    <%= form_with model: @customer, url: customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
-    <%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
-<form class="bg-home d-flex align-items-center w-150 h-150">
-      <div class="container my-5 py-5 my-5 py-5">
-        <div class="row">
-          <div class="col-11 col-lg-5 jumbotron bg-transparent mx-auto mt-4" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
-            <div class="text-center">
-              <%= image_tag 'up.png', width: '55%', height: '55%',class: "mb-3" %>
-              </br>
-                <div class="form-group form-group-lg">
-                 <%= f.text_field :name, autocomplete: "name",placeholder:"ユーザーネーム" %></br>
-                </div>
-                <div class="form-group form-group-lg">
-                 <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com" %></br>
-                </div>
-                <div class="form-group form-group-lg">
-                  <%= f.password_field :password, autocomplete: "current-password",placeholder:"6文字以上のパスワード" %>
-                </div>  
-                <div class="form-group form-group-lg">
-                 <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
-                 <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"パスワード確認用" %></br>
-                </div>
-            </div>
+    <%#= form_with model: @customer, url: customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%#= render "public/shared/error_messages", resource: resource %>
 
+        <form class="bg-home d-flex align-items-center w-150 h-150">
+              <div class="container my-5 py-5 my-5 py-5">
+                <%= render "public/shared/error_messages", resource: resource %>
+                <div class="row">
+                  <div class="col-11 col-lg-5 jumbotron bg-transparent mx-auto mt-4" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
+                    <div class="text-center">
+                      <%= image_tag 'up.png', width: '55%', height: '55%',class: "mb-3" %>
+                      </br>
+                        <div class="form-group form-group-lg">
+                         <%= f.text_field :name, autocomplete: "name",placeholder:"ユーザーネーム" %></br>
+                        </div>
+                        <div class="form-group form-group-lg">
+                         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com" %></br>
+                        </div>
+                        <div class="form-group form-group-lg">
+                          <%= f.password_field :password, autocomplete: "current-password",placeholder:"6文字以上のパスワード" %>
+                        </div>
+                        <div class="form-group form-group-lg">
+                         <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                         <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"パスワード確認用" %></br>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <%= f.submit "Sign up", class: "btn  btn-outline-secondary" %>
+                    </div>
+    <%end%>
 
-            
-            <div class="text-center">
-                <%= f.submit "Sign up", class: "btn  btn-outline-secondary" %><%end%>
-            </div>    
-
-            
           </div>
         </div>
       </div>

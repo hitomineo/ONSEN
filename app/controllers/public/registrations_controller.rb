@@ -2,8 +2,9 @@
 
 class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_permitted_parameters, if: :devise_controller?
-   #before_action :configure_sign_up_params, only: [:create]
+    # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+
 
 
   # GET /resource/sign_up
@@ -54,10 +55,23 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def configure_permitted_parameters
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   # end
+  # def sign_up_params
+  #   params.require(:registration).permit(:name)
+  # end
+
+  # def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  # end
+
+
+
 
   def after_sign_up_path_for(resource)
      posts_path
   end
+
+
+
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)

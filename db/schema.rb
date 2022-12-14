@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_12_09_072054) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
+    t.integer "onsen_name", null: false
     t.string "address", null: false
     t.float "latitude", null: false
     t.float "longitude", null: false
@@ -67,8 +68,6 @@ ActiveRecord::Schema.define(version: 2022_12_09_072054) do
     t.string "skin_product", null: false
     t.string "hairdryer", null: false
     t.string "luggage", null: false
-    t.string "description", null: false
-    t.integer "rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

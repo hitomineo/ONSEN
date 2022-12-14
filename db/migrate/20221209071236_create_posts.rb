@@ -2,6 +2,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
   def change
     create_table :posts do |t|
       t.integer:customer_id ,null:false
+      t.integer:onsen_name ,null:false
       t.string :address,null:false
       t.float:latitude,null:false
       t.float:longitude,null:false
@@ -12,8 +13,6 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string:skin_product,null:false
       t.string:hairdryer,null:false
       t.string:luggage,null:false
-      t.string:description,null:false
-      t.integer:rate ,null:false
       t.timestamps
     end
   end

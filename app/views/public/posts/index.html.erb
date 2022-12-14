@@ -1,16 +1,60 @@
 
+    <div class ="container  mt-5 pt-5">
+      <% @posts.each do |post| %>
+        <div class=" col-9 lg-5 mx-auto mb-5 pb-5"style="box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2)">
+          <div class ="justify-content-start pt-4 pl-3"> <%= post.customer.name%></div>
+            <div class ="text-center pt-4"><%= image_tag post.get_image(350,350),class: "pb-2" %></div>
+              <div class ="jumbotron bg-transparent">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th>温泉名</th>
+                      <th><%= post.onsen_name %></th>
+                    </tr>
 
-<div class ="container mt-3">
-    <div class="group">
-        <% @customers.each do |customer| %>
-          <div class ="formgroup">
-             <%= customer.name%>
-          </div>
-        <% end %>
+                    <tr>
+                      <th>駐車場</th>
+                      <th><%= post.parking_i18n %></th>
+                    </tr>
+
+                    <tr>
+                      <th>支払い方</th>
+                      <th><%= post.payment_i18n %></th>
+                    </tr>
+
+                    <tr>
+                      <th>シャンプー/コンディショナー</th>
+                      <th><%= post.toiletry %></th>
+                    </tr>
+
+                    <tr>
+                      <th>タオル有無</th>
+                      <th><%= post.towel_stock_i18n %></th>
+                    </tr>
+
+                    <tr>
+                      <th>化粧水/メイク落とし</th>
+                      <th><%= post.skin_product %></th>
+                    </tr>
+
+                    <tr>
+                      <th>ドライヤー(有無/風量)</th>
+                      <th><%= post.hairdryer %></th>
+                    </tr>
+
+                    <tr>
+                      <th>荷物の預け方</th>
+                      <th><%= post.luggage %></th>
+                    </tr>
+
+                    <tr><th></th></tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+      <% end %>
     </div>
 
-    
-    
 
 
 
@@ -22,5 +66,3 @@
 
 
 
-
-</div>    

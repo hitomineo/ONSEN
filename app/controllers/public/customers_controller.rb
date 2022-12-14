@@ -2,6 +2,7 @@ class Public::CustomersController < ApplicationController
 
   def show
        @customer = current_customer
+       @post = Post.new
   end
 
 
@@ -15,6 +16,14 @@ class Public::CustomersController < ApplicationController
   end
   end
 
+  def create
+      @post = Post.new(post_params)
+      @image = Post.new(post_params)
+  if  @post.save
+      flash[:notice] = "投稿しました"
+      redirect_to posts_path
+  end
+  end
 
 
   def quit
@@ -33,5 +42,12 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name,:email)
   end
+
+
+  private
+  def post_params
+    params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:image)
+  end
+
 
 end

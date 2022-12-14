@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
   scope module: :public do
     patch 'customers_information' => 'customers#update', as:'information'
-    resources :customers,only: [:show]
+    resources :customers,only: [:create,:show]
     get '/quit' => 'customers#quit', as:'quit'
     patch '/withdrawal' => 'customers#withdrawal', as:'withdrawal'
-    resources :posts, only: [:index, :show]
+    resources :posts, only: [:index, :create, :show]
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

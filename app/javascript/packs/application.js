@@ -11,9 +11,14 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application" 
+import "../stylesheets/application"
+import "../stylesheets/application.scss";
 import '@fortawesome/fontawesome-free/js/all'
+import "./raty.js"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+window.$ = window.jQuery = require('jquery');

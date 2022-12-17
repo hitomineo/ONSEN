@@ -1,7 +1,14 @@
 
     <div class ="container  mt-5 pt-5">
+
+      <!--検索機能-->
+      <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-2 my-lg-0 mr-auto' do |f| %>
+      <%= f.search_field :search, placeholder: "温泉名もしくは住所" %>
+      <%=f.submit 'Search', :address => nil %>
+      <%end%>
+
       <% @posts.each do |post| %>
-        <div class=" col-9 lg-5 mx-auto mb-5 pb-5"style="box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2)">
+        <div class=" col-9 lg-5 mx-auto mb-5 pb-5"style="box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5)">
           <div class ="justify-content-start pt-4 pl-3"> <%= post.customer.name%></div>
             <div class ="text-center pt-4"><%= image_tag post.get_image(350,350),class: "pb-2" %></div>
               <div class ="jumbotron bg-transparent">
@@ -10,6 +17,11 @@
                     <tr>
                       <th>温泉名</th>
                       <th><%= post.onsen_name %></th>
+                    </tr>
+
+                    <tr>
+                      <th>住所</th>
+                      <th><%= post.address %></th>
                     </tr>
 
                     <tr>
@@ -47,13 +59,94 @@
                       <th><%= post.luggage %></th>
                     </tr>
 
-                    <tr><th></th></tr>
+
+                    <tr><th></th><td><div id="map-<%= post.id %>" style="width:400px;height:300px "></div>
+                     </td></tr>
+
+
+<!--星機能-->
+                    <tr>
+                        <div id="star-rate<%= post.id%>"> </td>
+                        <script>
+                          $('#star-rate<%= post.id %>').empty();
+                          $('#star-rate<%= post.id%>').raty({
+                            size      : 36,
+                            starOff   : '<%= asset_path('star-off.png') %>',
+                            starOn    : '<%= asset_path('star-on.png') %>',
+                            half      : false,
+                            readOnly: true,
+                            score: '<%= post.star.nil? ? 0 :  post.star %>'
+                          });
+                        </script>
+                        </div>
+                    </tr>
+
                   </tbody>
                 </table>
               </div>
-        </div>
+
+                <div class ="text-right pr-5" id="like_buttons_<%= post.id %>">
+                   <%= render "public/likes/likes", post: post %>
+                </div>
+         </div>
       <% end %>
     </div>
+     <script>
+                        function initMap(){
+                          // 地図の位置情報(緯度・経度)を取得
+                        <% @posts.each do |post| %>
+                        {
+                          let mapPosition = {lat: <%= post.latitude || 0 %> , lng: <%= post.longitude || 0 %> };
+                          let map = new google.maps.Map(document.getElementById("map-<%= post.id %>"), {
+                            zoom: 15,
+                            center: mapPosition
+                          });
+                          let transitLayer = new google.maps.TransitLayer();
+                          transitLayer.setMap(map);
+
+                          let contentString = '【住所】<%= post.address %>';
+                          let infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                          });
+
+                          let marker = new google.maps.Marker({
+                            position: mapPosition,
+                            map: map,
+                            title: contentString
+                          });
+
+                          marker.addListener('click', function(){
+                            infowindow.open(map, marker);
+                          });
+                        }<%end%>
+                        }
+
+                          //   function initMap() {
+                          //     var myLatLng = {lat: <%#= post.latitude %>, lng: <%#= post.longitude %>};
+                          //     var map = new google.maps.Map(document.getElementById('map'), {
+                          //         zoom: 14,
+                          //         center: myLatLng
+                          //     });
+
+                          //     var marker = new google.maps.Marker({
+                          //         position: myLatLng,
+                          //         map: map,
+
+                          //     });
+
+                          //     marker.addListener('click', function(){
+                          //       infowindow.open(map, marker);
+                          //     });
+
+                          //     var mapOptions = {
+                          //         overviewMapControl: true,
+                          //     };
+
+                          // }
+
+                      </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+
 
 
 

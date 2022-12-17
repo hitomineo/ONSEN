@@ -1,0 +1,32 @@
+<body>
+    <div class ="container text-center mt-5 pt-5 ">
+      <div class ="row">
+        <% @photos.each do |photo| %>
+          <div class ="group">
+             <%= link_to edit_post_path(photo),class: "text-secondary" do %>
+                <%= image_tag photo.get_image(250,250),class: "mx-5 mt-5 pb-3 px-2  img-responsive" %>
+                  <div class="col-5"><%= photo.onsen_name %></div>
+
+                  <!--星機能-->
+                  <div id="star-rate<%= photo.id%>">
+                   <script>
+                    $('#star-rate<%= photo.id %>').empty();
+                    $('#star-rate<%= photo.id%>').raty({
+                       size      : 36,
+                       starOff   : '<%= asset_path('star-off.png') %>',
+                       starOn    : '<%= asset_path('star-on.png') %>',
+                       half      : false,
+                      readOnly: true,
+                       score: <%= photo.star.nil? ? 0 :  photo.star %>
+                     });
+                   </script>
+
+
+
+             <%end%>
+           </div>
+        <%end%>
+      </div>
+    </div>
+</body>
+

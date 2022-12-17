@@ -6,24 +6,32 @@ class Public::CustomersController < ApplicationController
   end
 
 
-  def  update
-       @customer = current_customer
-  if   @customer.update(customer_params)
-       flash[:notice] = "You have updated user successfully."
-       redirect_to customer_path(@customer.id)
+  def update
+      @customer = current_customer
+  if  @customer.update(customer_params)
+      flash[:notice] = "アップデートの完了です！"
+      redirect_to customer_path(@customer.id)
   else
-       render :show
+      render :show
   end
   end
 
-  def create
-      @post = Post.new(post_params)
-      @image = Post.new(post_params)
-  if  @post.save
-      flash[:notice] = "投稿しました"
-      redirect_to posts_path
+
+
+  def index
+      @photos = current_customer.posts
+      @photos = Post.all.order(created_at: :desc)
   end
+
+
+
+
+  def destroy
+      photo_details = Post.find(params[:id])
+      photo_details.destroy
+      redirect_to customers_path
   end
+
 
 
   def quit
@@ -46,7 +54,7 @@ class Public::CustomersController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:image)
+    params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:image,:onsen_name,:star)
   end
 
 

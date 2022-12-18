@@ -1,5 +1,4 @@
 
-    <%#= form_with model: @customer, url: customer_session_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%#= render "public/shared/error_messages", resource: resource %>
 
@@ -21,7 +20,6 @@
                           <%= f.password_field :password, autocomplete: "current-password",placeholder:"6文字以上のパスワード" %>
                         </div>
                         <div class="form-group form-group-lg">
-                         <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
                          <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"パスワード確認用" %></br>
                         </div>
                     </div>

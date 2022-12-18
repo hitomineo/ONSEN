@@ -1,4 +1,4 @@
-<body>
+
   <div class ="text align-items-center">
         <div class ="container mt-5 pt-5">
           <div class ="text-center ">
@@ -134,10 +134,9 @@
               <div class ="text align-items-center">
                 <div class ="container pt-5 pb-5 mb-5">
                   <div class ="text-center ">
-                    <%= f.submit 'アップデート',class: "btn  btn-outline-secondary mr-5" %><%= link_to "消去", customer_path, class: "btn btn-outline-secondary ml-5", method: :delete ,data: { confirm: '本当に削除しますか？' } %>
+                    <%= f.submit 'アップデート',class: "btn  btn-outline-secondary mr-5" %><%= link_to "消去", post_path, class: "btn btn-outline-secondary ml-5", method: :delete ,data: { confirm: '本当に削除しますか？' } %>
                   </div>
                 </div>
               </div>
        <%end%>
 
-</body>

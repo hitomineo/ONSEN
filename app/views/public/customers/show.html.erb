@@ -1,20 +1,28 @@
 
-    <body>
+   <div class ="text align-items-center mt-5 pt-5">
+        <div class ="container pt-5">
+          <div class ="text-center ">
+            <%= image_tag 'hennsyuu.png', width: '10%', height: '10%' %>
+          </div>
+        </div>
+      </div>
 
       <div class="bg-home d-flex align-items-center w-150 h-150">
-              <div class="container my-5 py-5 my-5 py-5">
-               <%= flash[:notice] %>
+              <div class="container my-5 py-5">
                 <div class="row">
-                  <div class="col-11 col-lg-5 jumbotron bg-transparent mx-auto mt-4" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
-                    <div class="text-center">
-                      <%= image_tag 'pro.png', width: '55%', height: '55%',class: "mb-3" %>
-                      <br>
-                        <%= form_with model: @customer, url: information_path, method: :patch do |f| %>
+                  <div class="col-11 col-lg-5 jumbotron bg-transparent mx-auto mt-3" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
+                      <div class="text-center">
+                       <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-3",size: "150x150" %>
+                         <br>
+                           <%= form_with model: @customer, url: information_path, method: :patch do |f| %>
                             <div class="form-group form-group-lg">
                                <%= f.text_field :name, autofocus: true, class: "form-control " %></br>
                             </div>
                             <div class="form-group form-group-lg">
                                <%= f.email_field :email, autofocus: true, class: "form-control" %></br>
+                            </div>
+                            <div class="form-group form-group-lg">
+                               <%=f.file_field :customer_image %>
                             </div>
                             <div class="form-group form-group-lg pt-3">
                                <%= f.submit 'プロフィール更新',class: "btn  btn-outline-secondary" %><%= link_to "退会する", quit_path, class: "btn btn-outline-secondary ml-5" %>
@@ -33,7 +41,7 @@
       <div class ="text align-items-center">
         <div class ="container">
           <div class ="text-center ">
-            <h3>TOUKOU</h3>
+            <%= image_tag 'toukou.png', width: '10%', height: '10%',class: "mb-3" %>
           </div>
         </div>
       </div>
@@ -174,6 +182,3 @@
                 </div>
               </div>
        <%end%>
-
-
-    </body>

@@ -121,29 +121,6 @@
                         }<%end%>
                         }
 
-                          //   function initMap() {
-                          //     var myLatLng = {lat: <%#= post.latitude %>, lng: <%#= post.longitude %>};
-                          //     var map = new google.maps.Map(document.getElementById('map'), {
-                          //         zoom: 14,
-                          //         center: myLatLng
-                          //     });
-
-                          //     var marker = new google.maps.Marker({
-                          //         position: myLatLng,
-                          //         map: map,
-
-                          //     });
-
-                          //     marker.addListener('click', function(){
-                          //       infowindow.open(map, marker);
-                          //     });
-
-                          //     var mapOptions = {
-                          //         overviewMapControl: true,
-                          //     };
-
-                          // }
-
                       </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 

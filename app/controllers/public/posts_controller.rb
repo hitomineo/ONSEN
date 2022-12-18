@@ -35,7 +35,9 @@ class Public::PostsController < ApplicationController
 
 
   def edit
-    @post = Post.find(params[:id])
+     @post = Post.find(params[:id])
+     @customer = current_customer
+    redirect_to(posts_path) unless @customer.email != "guest@example.com"
   end
 
 
@@ -54,12 +56,9 @@ class Public::PostsController < ApplicationController
 
    def destroy
        post = Post.find(params[:id])
-     if  post.destroy
+       post.destroy
        flash[:notice] = "削除されました"
        redirect_to customers_path
-     else
-       render 'public/customer/index'
-     end
    end
 
 

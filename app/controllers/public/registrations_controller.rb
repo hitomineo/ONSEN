@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  before_action :ensure_normal_customer, only: :destroy
+  before_action :ensure_normal_customer, only: %i[update destroy]
   # before_action :configure_permitted_parameters, if: :devise_controller?
-    # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+
+
+  def ensure_normal_customer
+    if resource.email == 'guest@example.com'
+      redirect_to customer_path, alert: 'ゲストユーザーは削除できません。'
+    end
+  end
+
+
+  def ensure_normal_customer
+    if resource.name == 'ゲストユーザー'
+      redirect_to customer_path, alert: 'ゲストユーザーの更新・削除はできません。'
+    end
+  end
 
 
 

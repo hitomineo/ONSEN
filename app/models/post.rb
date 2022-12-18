@@ -3,8 +3,6 @@ class Post < ApplicationRecord
     belongs_to :customer
     has_one_attached :image
     has_many :likes, dependent: :destroy
-    has_many :stars, dependent: :destroy
-
 
 # 緯度経度
     geocoded_by :address

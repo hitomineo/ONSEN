@@ -8,6 +8,13 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
      posts_path
   end
+
+
+  def new_guest
+    customer = Customer.guest
+    sign_in customer   # ユーザーをログインさせる
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
   # GET /resource/sign_in
   # def new
   #   super

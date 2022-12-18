@@ -3,6 +3,7 @@ class Public::CustomersController < ApplicationController
   def show
        @customer = current_customer
        @post = Post.new
+       redirect_to(posts_path) unless @customer.email != "guest@example.com"
   end
 
 
@@ -20,7 +21,7 @@ class Public::CustomersController < ApplicationController
 
   def index
       @photos = current_customer.posts
-      @photos = Post.all.order(created_at: :desc)
+      @photos = current_customer.posts.order(created_at: :desc)
   end
 
 
@@ -28,10 +29,10 @@ class Public::CustomersController < ApplicationController
 
   def destroy
       photo_details = Post.find(params[:id])
+      star.destroy
       photo_details.destroy
       redirect_to customers_path
   end
-
 
 
   def quit
@@ -48,13 +49,13 @@ class Public::CustomersController < ApplicationController
 
   private
   def customer_params
-    params.require(:customer).permit(:name,:email)
+    params.require(:customer).permit(:name,:email,:customer_image,)
   end
 
 
   private
   def post_params
-    params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:image,:onsen_name,:star)
+    params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:onsen_name,:star)
   end
 
 

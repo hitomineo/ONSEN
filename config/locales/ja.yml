@@ -1,0 +1,16 @@
+ ja:
+    enums:
+      post:
+        parking:
+          existence: "駐車場あり"
+          not_exist: "駐車場なし"
+        payment:
+          cash: "現金"
+          credit_card: "クレジットカード"
+          electronic_payment: "電子マネー"
+          qr: "QR"
+        towel_stock:
+          available: "あり"
+          no_exist: "なし"
+          
+          

@@ -1,0 +1,142 @@
+
+  <div class ="text align-items-center">
+        <div class ="container mt-5 pt-5">
+          <div class ="text-center ">
+            <h3>UPDATE</h3>
+          </div>
+        </div>
+      </div>
+
+       <%= form_with model: @post do |f| %>
+         <div class ="ml-5 pl-5 mr-5 pr-5">
+            <table class="table table-hover">
+              <tbody>
+
+                  <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fas fa-pen"></i> 温泉名</th></div>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :onsen_name, autofocus: true,placeholder: "温泉名を再入力", class: "form-control" %></div> </th>
+                  </tr>
+
+
+                  </br>
+
+                  <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-map-pin" aria-hidden="true"></i> 住所</th></div>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :address, autofocus: true,placeholder: "住所を再入力（分からなければ温泉名をお書きください）", class: "form-control" %></div> </th>
+                  </tr>
+
+                </br>
+
+                  <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-car" aria-hidden="true"></i> 駐車場(有無)</div></th>
+                    <th><div class ="pb-2 pt-2">
+                          <%= f.radio_button :parking, Post.parkings.key(0), {:checked => true} %>
+                          <%= f.label :parking, Post.parkings_i18n[:existence], value: Post.parkings.key(0) %>
+                          <%= f.radio_button :parking, Post.parkings.key(1) %>
+                          <%= f.label :parking,Post.parkings_i18n[:not_exist], value: Post.parkings.key(1) %>
+                        </div>
+                    </th>
+                  </tr>
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-credit-card" aria-hidden="true"></i> 支払い方 </br>(１現金２クレジット３電子マネー４QR)</div></th>
+                    <th><div class ="pb-2 pt-2">
+
+                          <%= f.radio_button :payment, Post.payments.key(0), {:checked => @post.payment == "cash"} %>
+                          <%= f.label :payment, Post.payments_i18n[:cash], value: Post.payments.key(0) %>
+                          <%= f.radio_button :payment, Post.payments.key(1),{:checked => @post.payment == "credit_card"} %>
+                          <%= f.label :payment,Post.payments_i18n[:credit_card], value: Post.payments.key(1) %>
+                          <%= f.radio_button :payment, Post.payments.key(2), {:checked => @post.payment == "electronic_payment"} %>
+                          <%= f.label :payment, Post.payments_i18n[:electronic_payment], value: Post.payments.key(2) %>
+                          <%= f.radio_button :payment, Post.payments.key(3), {:checked => @post.payment == "qr"} %>
+                          <%= f.label :payment,Post.payments_i18n[:qr], value: Post.payments.key(3)  %>
+                        </div>
+                    </th>
+                </tr>
+
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-shower" aria-hidden="true"></i> シャンプー/コンディショナー</div></th>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :toiletry, autofocus: true, placeholder: "例）シャンプーの種類やトリートメントの有無など", class: "form-control " %></div> </th>
+                </tr>
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> タオル(有無)</div></th>
+                    <th><div class ="pb-2 pt-2">
+                          <%= f.radio_button :towel_stock, Post.towel_stocks.key(0), {:checked => true} %>
+                          <%= f.label :towel_stock, Post.towel_stocks_i18n[:available], value: Post.towel_stocks.key(0) %>
+                          <%= f.radio_button :towel_stock, Post.towel_stocks.key(1) %>
+                          <%= f.label :towel_stock,Post.towel_stocks_i18n[:no_exist], value: Post.towel_stocks.key(1) %>
+                        </div>
+                    </th>
+                </tr>
+
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-heart" aria-hidden="true"></i> 化粧水/メイク落とし</div></th>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :skin_product, autofocus: true, placeholder: "化粧水/メイク落としの有無", class: "form-control " %></div></th>
+                </tr>
+
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-plug" aria-hidden="true"></i> ドライヤー(有無/風量)</div></th>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :hairdryer, autofocus: true, placeholder: "ドライヤーの有無/代数/風量", class: "form-control " %></div></th>
+                </tr>
+
+
+                  </br>
+
+                <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fa fa-suitcase" aria-hidden="true"></i> 荷物の預け方</th></div>
+                    <th><div class ="pb-2 pt-2"><%= f.text_field :luggage, autofocus: true, class: "form-control " %></div> </th>
+                </tr>
+
+
+                  </br>
+
+                  <tr>
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fas fa-camera"></i> 画像 (温泉の画像を１枚選択してください)</th></div>
+                    <th><div class ="pb-2 pt-2 pb-5"><%=f.file_field :image %></div></th>
+                  </tr>
+
+                  </br>
+
+                   <tr class="form-group row" id="star">
+                    <th><div class ="pb-2 pt-2 pl-5"><i class="fas fa-camera"></i> <%= f.label :star,'評価'%></th></div>
+                    <th><div class ="pb-2 pt-2 pb-5"><%= f.hidden_field :star, id: :review_star %></div></th>
+                    <script>
+                          $('#star').empty()
+                          $('#star').raty({
+                            size     : 36,
+                            starOff:  '<%= asset_path('star-off.png') %>',
+                            starOn : '<%= asset_path('star-on.png') %>',
+                             scoreName: 'post[star]',
+                            half: false,
+                          });
+                    </script>
+                  </tr>
+
+
+              </tbody>
+            </table>
+        </div>
+
+              <div class ="text align-items-center">
+                <div class ="container pt-5 pb-5 mb-5">
+                  <div class ="text-center ">
+                    <%= f.submit 'アップデート',class: "btn  btn-outline-secondary mr-5" %><%= link_to "消去", post_path, class: "btn btn-outline-secondary ml-5", method: :delete ,data: { confirm: '本当に削除しますか？' } %>
+                  </div>
+                </div>
+              </div>
+       <%end%>
+

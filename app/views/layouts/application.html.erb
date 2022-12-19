@@ -1,16 +1,23 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <title>ONSEN</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/jpncss@latest/dist/bootstrap/jpn.min.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.css" type="text/css" media="all" />
   </head>
 
+
   <body>
+    <%= render 'layouts/header' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

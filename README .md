@@ -1,38 +1,15 @@
-<!--# README-->
-
-<!--This README would normally document whatever steps are necessary to get the-->
-<!--application up and running.-->
-
-<!--Things you may want to cover:-->
-
-<!--* Ruby version-->
-
-<!--* System dependencies-->
-
-<!--* Configuration-->
-
-<!--* Database creation-->
-
-<!--* Database initialization-->
-
-<!--* How to run the test suite-->
-
-<!--* Services (job queues, cache servers, search engines, etc.)-->
-
-<!--* Deployment instructions-->
-
-<!--* ...-->
-
-
-# ONSEN
+# 温泉道
 ## サイト概要
 ### サイトテーマ
 どんな温泉なのか、温泉設備やアメニティーは利用できるのか。といった頭によぎる『どうなんだろう？』を解消することができるウェブアプリケーションです。
 
 ### テーマを選んだ理由
 ・なぜこのテーマにしたか。
-温泉に行った時に事前に調べて思っていた温泉の雰囲気が、行ってみると違かったことや、支払い方に指定があったり、ドライヤーを利用する際に風量が全くなく困った事がありました。
-『到着する前に知ってれば、、』とならない様にできればと思った為です。
+温泉に行った時に、支払い方に指定があり友達に借りることがあったり、
+ドライヤーを利用する際に風量や代数が無かった為、一緒に来ていた方々を待たせてしまった事や、
+反対にアメニティーが常備してあった為助かった場面がありました。
+『到着する前に知ってれば、、』といったことや『アメニティーがあるから、帰り道によってみよう』と温泉の利用を広げることの助けができれば幸いだと思った為です
+
 
 
 ### ターゲットユーザ

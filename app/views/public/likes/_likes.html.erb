@@ -1,0 +1,9 @@
+ <% if post.liked_by? (current_customer) %>
+    <%= link_to post_likes_path(post), method: :delete,remote: true do %>
+        <span><i class="fas fa-heart fa-lg faa-tada a animated-hover" style="color: rosybrown;"></i>︎</span>
+    <% end %>
+  <% else %>
+    <%= link_to  post_likes_path(post), method: :post,remote: true do %>
+         <span><i class="far fa-heart fa-lg" style="color: rosybrown;"></i>︎</span>
+    <%end%>
+  <%end%>

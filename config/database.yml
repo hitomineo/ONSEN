@@ -27,7 +27,7 @@ production:
 
 production:
   <<: *default
-  database: <%= ENV['ONSENDOU'] %>
+  database: <%= ENV['ONSEN'] %>
   adapter: mysql2
   encoding: utf8mb4
   charset: utf8mb4

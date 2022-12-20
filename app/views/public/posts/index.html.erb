@@ -1,97 +1,118 @@
 
-    <div class ="container  mt-5 pt-5">
-
-      <!--検索機能-->
-      <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-2 my-lg-0 mr-auto' do |f| %>
+<div class ="container">
+  <div class ="mt-5 mb-5">
+    <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-3 my-lg-0 pb-5 justify-content-end' do |f| %>
       <%= f.search_field :search, placeholder: "温泉名もしくは住所" %>
-      <%=f.submit 'Search', :address => nil %>
-      <%end%>
+      <%=f.submit 'Search', :address => nil,class: "btn  btn-outline-secondary ml-5 " %>
+    <%end%>
+  </div>
 
+
+    <div class ="row">
       <% @posts.each do |post| %>
-        <div class=" col-9 lg-5 mx-auto mb-5 pb-5"style="box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5)">
+        <div class ="col-5 lg-4 ml-5 mr-5 mb-5 pb-5", style="box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5)">
           <div class ="justify-content-start pt-4 pl-3"> <%= post.customer.name%></div>
-            <div class ="text-center pt-4"><%= image_tag post.get_image(350,350),class: "pb-2" %></div>
-              <div class ="jumbotron bg-transparent">
+            <div class ="text-center pt-4"><%= image_tag post.get_image(240,240) %></div>
+              <div class ="mt-5 ml-5 mr-5">
                 <table class="table">
                   <tbody>
                     <tr>
-                      <th>温泉名</th>
-                      <th><%= post.onsen_name %></th>
+                      <th>
+                        <i class="fas fa-pen"></i> 温泉名 /
+                         <%= post.onsen_name %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>住所</th>
-                      <th><%= post.address %></th>
+                      <th>
+                        <i class="fa fa-map-pin" aria-hidden="true"></i> 住所 /
+                         <%= post.address %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>駐車場</th>
-                      <th><%= post.parking_i18n %></th>
+                      <th>
+                         <i class="fa fa-car" aria-hidden="true"></i> 駐車場 /
+                          <%= post.parking_i18n %>
+                      </th>
+                      </tr>
+
+                    <tr>
+                      <th>
+                          <i class="fa fa-credit-card" aria-hidden="true"></i> 支払い方 /
+                           <%= post.payment_i18n %>
+                      </th>
+                      </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-shower" aria-hidden="true"></i> シャンプー/コンディショナー /
+                         <%= post.toiletry %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>支払い方</th>
-                      <th><%= post.payment_i18n %></th>
+                      <th>
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> タオル有無 /
+                         <%= post.towel_stock_i18n %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>シャンプー/コンディショナー</th>
-                      <th><%= post.toiletry %></th>
+                      <th>
+                        <i class="fa fa-heart" aria-hidden="true"></i> 化粧水/メイク落とし /
+                         <%= post.skin_product %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>タオル有無</th>
-                      <th><%= post.towel_stock_i18n %></th>
+                      <th>
+                        <i class="fa fa-plug" aria-hidden="true"></i> ドライヤー(有無/風量) /
+                         <%= post.hairdryer %>
+                      </th>
                     </tr>
 
                     <tr>
-                      <th>化粧水/メイク落とし</th>
-                      <th><%= post.skin_product %></th>
+                      <th>
+                        <i class="fa fa-suitcase" aria-hidden="true"></i> 荷物の預け方 /
+                         <%= post.luggage %>
+                      </th>
                     </tr>
 
-                    <tr>
-                      <th>ドライヤー(有無/風量)</th>
-                      <th><%= post.hairdryer %></th>
-                    </tr>
-
-                    <tr>
-                      <th>荷物の預け方</th>
-                      <th><%= post.luggage %></th>
-                    </tr>
-
-
-                    <tr><th></th><td><div id="map-<%= post.id %>" style="width:400px;height:300px "></div>
-                     </td></tr>
 
 
 <!--星機能-->
-                    <tr>
-                        <div id="star-rate<%= post.id%>"> </td>
-                        <script>
-                          $('#star-rate<%= post.id %>').empty();
-                          $('#star-rate<%= post.id%>').raty({
-                            size      : 36,
-                            starOff   : '<%= asset_path('star-off.png') %>',
-                            starOn    : '<%= asset_path('star-on.png') %>',
-                            half      : false,
-                            readOnly: true,
-                            score: '<%= post.star.nil? ? 0 :  post.star %>'
-                          });
-                        </script>
-                        </div>
-                    </tr>
+                      <div id="star-rate<%= post.id%>">
+                          <script>
+                            $('#star-rate<%= post.id %>').empty();
+                            $('#star-rate<%= post.id%>').raty({
+                              size      : 36,
+                              starOff   : '<%= asset_path('star-off.png') %>',
+                              starOn    : '<%= asset_path('star-on.png') %>',
+                              half      : false,
+                              readOnly: true,
+                              score: '<%= post.star.nil? ? 0 :  post.star %>'
+                            });
+                          </script>
+                      </div>
 
                   </tbody>
                 </table>
               </div>
 
-                <div class ="text-right pr-5" id="like_buttons_<%= post.id %>">
-                   <%= render "public/likes/likes", post: post %>
-                </div>
-         </div>
+              <div class ="ml-5">
+                <div id="map-<%= post.id %>" style="width:300px;height:150px "></div>
+              </div>
+
+                    <div class ="text-right pr-5" id="like_buttons_<%= post.id %>">
+                       <%= render "public/likes/likes", post: post %>
+                    </div>
+        </div>
       <% end %>
     </div>
-     <script>
+</div>
+
+                     <script>
                         function initMap(){
                           // 地図の位置情報(緯度・経度)を取得
                         <% @posts.each do |post| %>
@@ -120,19 +141,5 @@
                           });
                         }<%end%>
                         }
-
                       </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

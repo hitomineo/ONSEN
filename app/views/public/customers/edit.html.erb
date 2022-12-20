@@ -1,0 +1,36 @@
+<div class="container my-5 py-5">
+  <div class="col-8 col-lg-7 jumbotron bg-transparent mx-auto mt-3" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
+     <div class ="d-flex justify-content-center">
+       <%= image_tag 'hennsyuu.png', width: '20%', height: '20%',class: "mb-5" %>
+     </div>
+
+        <br>
+
+           <%= form_with model: @customer, url: information_path, method: :patch do |f| %>
+              <div class="row">
+                 <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-3",size: "150x150" %>
+                     <div class="col-9 pl-5 ">
+                        <i class="fas fa-user-plus"></i> <%= f.label :名前 %>
+                          <div class ="pb-2 pt-2 pb-4 ml-4 mr-4">
+                            <%= f.text_field :name, autofocus: true, class: "form-control xs-2" %>
+                          </div>
+
+                            <i class="far fa-envelope"></i> <%= f.label :メールアドレス %>
+                              <div class ="pb-2 pt-2 ml-4 mr-4  mb-1">
+                                <%= f.email_field :email, autofocus: true, class: "form-control xs-2" %>
+                              </div>
+
+                                <i class="fas fa-image"></i> <%= f.label :写真選択 %></br>
+                                  <div class ="pb-5 pt-2 ml-4 mr-4 mb-5 ">
+                                    <%=f.file_field :customer_image %>
+                                  </div>
+                     </div>
+              </div>
+                                    <div class ="text-center">
+                                      <div class="form-group form-group-lg pt-3">
+                                       <%= f.submit 'プロフィール更新',class: "btn  btn-outline-secondary" %><%= link_to "退会する", quit_path, class: "btn btn-outline-secondary ml-5" %>
+                                      </div>
+                                    </div>
+           <%end%>
+  </div>
+</div>

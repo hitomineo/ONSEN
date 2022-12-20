@@ -7,13 +7,18 @@ class Public::CustomersController < ApplicationController
   end
 
 
+  def edit
+      @customer = current_customer
+  end
+
+
   def update
       @customer = current_customer
   if  @customer.update(customer_params)
       flash[:notice] = "アップデートの完了です！"
-      redirect_to customer_path(@customer.id)
+      redirect_to posts_path(@customer.id)
   else
-      render :show
+      render :edit
   end
   end
 

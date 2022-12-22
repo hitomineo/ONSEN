@@ -1,4 +1,9 @@
-<div class="bg-home d-flex align-items-center">
+<div class="text-success text-center mt-5 pt-5">
+ <div class="notice"><%= flash[:notice] %></div>
+</div>
+
+
+ <div class="bg-home d-flex align-items-center">
   <div class ="container mt-5 pt-5">
     <div class="row">
       <div class="col-md-10 jumbotron bg-transparent mx-auto mt-5" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
@@ -8,7 +13,7 @@
 
           <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-5",size: "80x80" %>
            <%= @customer.name%>
-            <%= link_to edit_customer_path  do %>
+            <%= link_to edit_customer_path(@customer) do %>
              <i class="fas fa-tools fa-lg" style="color: #CCCCCC;"></i>
             <%end%>
 
@@ -100,7 +105,7 @@
        </div>
     </div>
   </div>
-</div>
+ </div>
 
           <script>
             $('#star').empty()

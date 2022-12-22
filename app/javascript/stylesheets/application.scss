@@ -23,10 +23,13 @@ body , html ,  {
 }
 
 
+
+
+
 .img{
   background-position: center;
   background-size: cover;
-  width: 200%;
+  width: 100%;
 }
 
 
@@ -62,7 +65,9 @@ opacity:0;
   background-size:cover;
   background-position: 100%;
   position: relative;
+
 }
+
 .bottom::after {
   content: '';
   background-color: rgba(0,0,0,.5);
@@ -74,54 +79,62 @@ opacity:0;
 }
 
 
+.text1{
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 60px;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
 
-.message{
-  animation-name:zoomInAnime;
-  animation-duration:10s;
-  animation-fill-mode:forwards;
-}
-
-@keyframes zoomInAnime{
-  from {
-  transform: scale(0.6);
-  opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-  opacity: 1;
-  }
 }
 
 
 
-
-
-
-
-
-.bottom{
-animation-name:fadeUpAnime;
-animation-duration:10s;
-animation-fill-mode:forwards;
-opacity:0;
+#page_top{
+  width: 90px;
+  height: 90px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  opacity: 0.6;
 }
-
-@keyframes fadeUpAnime{
-  from {
-    opacity: 0;
-  transform: translateY(100px);
-  }
-
-  to {
-    opacity: 1;
-  transform: translateY(0);
-  }
+.page_top a{
+  position: relative;
+  display: block;
+  width: 90px;
+  height: 90px;
+  text-decoration: none;
 }
-
-
-.bottom{
-    opacity: 0;
+.page_top a::before{
+  font-weight: 900;
+  content: '\f102';
+  font-size: 25px;
+  color: #3f98ef;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: -40px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
 }
-
-
+.page_top a::after{
+  content: 'PAGE TOP';
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  top: 45px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+  color: #3f98ef;
+}

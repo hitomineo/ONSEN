@@ -2,25 +2,24 @@ class Public::PostsController < ApplicationController
 
 
   def index
+    @customer = current_customer
     @customers = Customer.all
-    @posts = Post.all
     @posts = Post.all.order(created_at: :desc)
-
+    @posts = @posts.page(params[:page]).per(6)
   end
 
-  # 検索
+
   def search
     @posts = Post.search(params[:search])
+    @posts = @posts.page(params[:page]).per(6)
     render 'index'
   end
-
 
 
   def create
       @post = Post.new(post_params)
       @post.customer = current_customer
     if  @post.save
-      flash[:notice] = "投稿しました"
       redirect_to posts_path
     else
       @customer = current_customer
@@ -44,7 +43,6 @@ class Public::PostsController < ApplicationController
   def update
       @post = Post.find(params[:id])
     if  @post.update(post_params)
-      flash[:notice] = "更新が完了しました"
       redirect_to customers_path
     else
       @customer = current_customer
@@ -57,11 +55,14 @@ class Public::PostsController < ApplicationController
    def destroy
        post = Post.find(params[:id])
        post.destroy
-       flash[:notice] = "削除されました"
        redirect_to customers_path
    end
 
 
+  private
+  def customer_params
+    params.require(:customer).permit(:name,:email,:customer_image,)
+  end
 
 
   private
@@ -69,4 +70,5 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,
                                   :longitude,:onsen_name,:parking, :payment, :towel_stock,:image,:star)
   end
+
 end

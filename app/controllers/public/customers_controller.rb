@@ -15,8 +15,8 @@ class Public::CustomersController < ApplicationController
   def update
       @customer = current_customer
   if  @customer.update(customer_params)
-      flash[:notice] = "アップデートの完了です！"
-      redirect_to posts_path(@customer.id)
+      flash[:notice] = "プロフィールの更新完了です！"
+      redirect_to customer_path(@customer.id)
   else
       render :edit
   end
@@ -27,8 +27,15 @@ class Public::CustomersController < ApplicationController
   def index
       @photos = current_customer.posts
       @photos = current_customer.posts.order(created_at: :desc)
+      @photos = @photos.page(params[:page]).per(6)
   end
 
+
+   def favorites
+       @customer = Customer.find(params[:id])
+       likes = @customer.likes.pluck(:post_id)
+       @favorite_posts = Post.find(likes)
+   end
 
 
 
@@ -62,6 +69,7 @@ class Public::CustomersController < ApplicationController
   def post_params
     params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,:longitude,:onsen_name,:star)
   end
+
 
 
 end

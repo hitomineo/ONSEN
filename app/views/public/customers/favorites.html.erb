@@ -1,20 +1,6 @@
- <% if current_customer.email != "guest@example.com" %>
-  <%= link_to"お気に入り記事", favorites_customer_path(current_customer) %>
-<% end %>
-
-<div class ="container">
-  <div class ="mt-5 mb-5">
-    <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-3 my-lg-0 pb-5 justify-content-end' do |f| %>
-      <%= f.search_field :search, placeholder: "温泉名もしくは住所" %>
-      <%=f.submit 'Search', :address => nil,class: "btn  btn-outline-secondary ml-5 " %>
-    <%end%>
-  </div>
-
-
-    <div class ="row">
-      <% @posts.each do |post| %>
+<% @favorite_posts.each do |post| %>
         <div class ="col-5 lg-4 ml-5 mr-5 mb-5 pb-5", style="box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5)">
-          <div class ="justify-content-start pt-4 pl-3"><%= image_tag post.customer.customer_get_image(50,50), class: "rounded-circle pb-2 mb-5",size: "80x80" %><%= post.customer.name%></div>
+          <div class ="justify-content-start pt-4 pl-3"> <%= post.customer.name%></div>
             <div class ="text-center pt-4"><%= image_tag post.get_image(240,240) %></div>
               <div class ="mt-5 ml-5 mr-5">
                 <table class="table">
@@ -81,6 +67,9 @@
                          <%= post.luggage %>
                       </th>
                     </tr>
+
+
+
 <!--星機能-->
                       <div id="star-rate<%= post.id%>">
                           <script>
@@ -103,23 +92,22 @@
               <div class ="ml-5">
                 <div id="map-<%= post.id %>" style="width:300px;height:150px "></div>
               </div>
-                   <% if current_customer.email != "guest@example.com" %>
+
                     <div class ="text-right pr-5" id="like_buttons_<%= post.id %>">
                        <%= render "public/likes/likes", post: post %>
                     </div>
-                  <% end %>
         </div>
+        <!--ページネーション-->
+        <%#= paginate @post %>
       <% end %>
-    </div>
-    <div class ="row justify-content-center mb-5 pb-5 mt-5 pt-5">
-      <%= paginate @posts %>
+
     </div>
 </div>
 
                      <script>
                         function initMap(){
                           // 地図の位置情報(緯度・経度)を取得
-                        <% @posts.each do |post| %>
+                        <% @favorite_posts.each do |post| %>
                         {
                           let mapPosition = {lat: <%= post.latitude || 0 %> , lng: <%= post.longitude || 0 %> };
                           let map = new google.maps.Map(document.getElementById("map-<%= post.id %>"), {

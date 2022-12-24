@@ -4,6 +4,7 @@
 
 
 
+
 body , html ,  {
     padding:0;
     margin:0;
@@ -23,10 +24,17 @@ body , html ,  {
 }
 
 
+.navbar-toggler {
+  background-color:dark;
+}
+
+
+
+
 .img{
   background-position: center;
   background-size: cover;
-  width: 200%;
+  width: 100%;
 }
 
 
@@ -62,7 +70,9 @@ opacity:0;
   background-size:cover;
   background-position: 100%;
   position: relative;
+
 }
+
 .bottom::after {
   content: '';
   background-color: rgba(0,0,0,.5);
@@ -74,54 +84,30 @@ opacity:0;
 }
 
 
-
-.message{
-  animation-name:zoomInAnime;
-  animation-duration:10s;
-  animation-fill-mode:forwards;
-}
-
-@keyframes zoomInAnime{
-  from {
-  transform: scale(0.6);
-  opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-  opacity: 1;
-  }
+.text1{
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 60px;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
 }
 
 
 
-
-
-
-
-
-.bottom{
-animation-name:fadeUpAnime;
-animation-duration:10s;
-animation-fill-mode:forwards;
-opacity:0;
+#page_top{
+  width: 80px;
+  height: 90px;
+  text-align: center;
+  color:white;
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
 
-@keyframes fadeUpAnime{
-  from {
-    opacity: 0;
-  transform: translateY(100px);
-  }
-
-  to {
-    opacity: 1;
-  transform: translateY(0);
-  }
-}
-
-
-.bottom{
-    opacity: 0;
-}
 
 

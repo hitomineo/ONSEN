@@ -20,5 +20,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-
+// 星機能
 window.$ = window.jQuery = require('jquery');

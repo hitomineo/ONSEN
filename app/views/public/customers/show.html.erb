@@ -1,106 +1,113 @@
-<div class="bg-home d-flex align-items-center">
-  <div class ="container mt-5 pt-5">
-    <div class="row">
-      <div class="col-md-10 jumbotron bg-transparent mx-auto mt-5" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
-        <div class ="d-flex justify-content-center">
-           <%= image_tag 'toukou.png', width: '15%', height: '15%',class: "mb-3" %>
-        </div>
-
-          <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-5",size: "80x80" %>
-           <%= @customer.name%>
-            <%= link_to edit_customer_path  do %>
-             <i class="fas fa-tools fa-lg" style="color: #CCCCCC;"></i>
-            <%end%>
-
-             <%= form_with model: @post, url: posts_path do |f| %>
-              <div class ="ml-5 pl-5 mr-5 pr-5">
-
-                <table class="table">
-                  <tbody>
-                    <tr><th>
-                      <i class="fas fa-pen"></i> <%= f.label :温泉名 %>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :onsen_name, autofocus: true,placeholder: "温泉名を入力してください", class: "form-control xs-2" %></div>
-                    </th></tr>
-
-                    <tr><th>
-                      <i class="fa fa-map-pin" aria-hidden="true"></i> <%= f.label :住所 %>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :address, autofocus: true,placeholder: "（分からなければ温泉名をお書きください）", class: "form-control xs-2" %></div>
-                    </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-car" aria-hidden="true"></i> <%= f.label :駐車場%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4">
-                          <%= f.radio_button :parking, Post.parkings.key(0), {:checked => true} %>
-                          <%= f.label :parking, Post.parkings_i18n[:existence], value: Post.parkings.key(0) %>
-                          <%= f.radio_button :parking, Post.parkings.key(1) %>
-                          <%= f.label :parking,Post.parkings_i18n[:not_exist], value: Post.parkings.key(1) %>
-                      </div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-credit-card" aria-hidden="true"></i> <%= f.label :支払い方%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4">
-                          <%= f.radio_button :payment, Post.payments.key(0), {:checked => true} %>
-                          <%= f.label :payment, Post.payments_i18n[:cash], value: Post.payments.key(0) %>
-                          <%= f.radio_button :payment, Post.payments.key(1) %>
-                          <%= f.label :payment,Post.payments_i18n[:credit_card], value: Post.payments.key(1) %>
-                          <%= f.radio_button :payment, Post.payments.key(2) %>
-                          <%= f.label :payment, Post.payments_i18n[:electronic_payment], value: Post.payments.key(2) %>
-                          <%= f.radio_button :payment, Post.payments.key(3) %>
-                          <%= f.label :payment,Post.payments_i18n[:qr], value: Post.payments.key(3) %>
-                       </div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-shower" aria-hidden="true"></i> <%= f.label :シャンプー・コンディショナー%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :toiletry, autofocus: true, placeholder: "例）シャンプーの種類やトリートメントの有無など", class: "form-control xs-2" %></div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> <%= f.label :タオル%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4">
-                          <%= f.radio_button :towel_stock, Post.towel_stocks.key(0), {:checked => true} %>
-                          <%= f.label :towel_stock, Post.towel_stocks_i18n[:available], value: Post.towel_stocks.key(0) %>
-                          <%= f.radio_button :towel_stock, Post.towel_stocks.key(1) %>
-                          <%= f.label :towel_stock,Post.towel_stocks_i18n[:no_exist], value: Post.towel_stocks.key(1) %>
-                      </div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-heart" aria-hidden="true"></i> <%= f.label :化粧水など%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :skin_product, autofocus: true, placeholder: "化粧水/メイク落としなどの有無", class: "form-control xs-2" %></div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-plug" aria-hidden="true"></i> <%= f.label :ドライヤー%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :hairdryer, autofocus: true, placeholder: "ドライヤーの有無/代数/風量", class: "form-control xs-2" %></div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fa fa-suitcase" aria-hidden="true"></i> <%= f.label :荷物の預け方%>
-                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :luggage, autofocus: true, class: "form-control xs-2" %></div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fas fa-camera"></i> <%= f.label :温泉の写真%>
-                      <div class ="pb-2 pt-2 pb-5 ml-4 mr-4"><%=f.file_field :image %></div>
-                     </th></tr>
-
-                     <tr><th>
-                      <i class="fas fa-camera"></i> <%= f.label :評価%>
-                      <div class ="pb-2 pt-2 pb-5 ml-5 mr-5"><class="form-group row" id="star"><%= f.hidden_field :star, id: :review_star %></div>
-                       <div class ="d-flex justify-content-end">
-                        <%= f.submit '投稿',class: "btn  btn-outline-secondary" %>
-                      </div>
-                     </th></tr>
-                  </tbody>
-                </table>
-              </div>
-             <%end%>
-       </div>
-    </div>
-  </div>
+<div class="text-success text-center mt-5 pt-5">
+  <div class="notice"><%= flash[:notice] %></div>
 </div>
+
+   <div class ="col-sm-12 pl-5 ml-5">
+     <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-5",size: "80x80" %>
+       <%= @customer.name%>
+         <%= link_to edit_customer_path(@customer) do %>
+           <i class="fas fa-tools fa-lg" style="color: #CCCCCC;"></i>
+         <%end%>
+   </div>
+
+
+
+    <div class="bg-home d-flex align-items-center ">
+      <div class ="container">
+        <div class="row ">
+          <div class="row-col-md-10 row-col-sm-10 jumbotron bg-transparent mx-auto mt-5" style="box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2)">
+            <div class ="d-flex justify-content-center">
+              <%= image_tag 'toukou.png', width: '15%', height: '15%',class: "mb-3" %>
+            </div>
+
+               <%= form_with model: @post, url: posts_path do |f| %>
+                 <div class ="ml-5 pl-5 mr-5 pr-5">
+                   <table class="table col-sm-12">
+                     <tbody>
+                       <tr><th>
+                         <i class="fas fa-pen"></i> <%= f.label :温泉名 %>
+                           <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :onsen_name, autofocus: true,placeholder: "温泉名を入力してください", class: "form-control xs-2" %></div>
+                       </th></tr>
+
+                       <tr><th>
+                         <i class="fa fa-map-pin" aria-hidden="true"></i> <%= f.label :住所 %>
+                         <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :address, autofocus: true,placeholder: "（分からなければ温泉名をお書きください）", class: "form-control xs-2" %></div>
+                       </th></tr>
+
+                       <tr><th>
+                         <i class="fa fa-car" aria-hidden="true"></i> <%= f.label :駐車場%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4">
+                            <%= f.radio_button :parking, Post.parkings.key(0), {:checked => true} %>
+                            <%= f.label :parking, Post.parkings_i18n[:existence], value: Post.parkings.key(0) %>
+                            <%= f.radio_button :parking, Post.parkings.key(1) %>
+                            <%= f.label :parking,Post.parkings_i18n[:not_exist], value: Post.parkings.key(1) %>
+                          </div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-credit-card" aria-hidden="true"></i> <%= f.label :支払い方%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4">
+                            <%= f.radio_button :payment, Post.payments.key(0), {:checked => true} %>
+                            <%= f.label :payment, Post.payments_i18n[:cash], value: Post.payments.key(0) %>
+                            <%= f.radio_button :payment, Post.payments.key(1) %>
+                            <%= f.label :payment,Post.payments_i18n[:credit_card], value: Post.payments.key(1) %>
+                            <%= f.radio_button :payment, Post.payments.key(2) %>
+                            <%= f.label :payment, Post.payments_i18n[:electronic_payment], value: Post.payments.key(2) %>
+                            <%= f.radio_button :payment, Post.payments.key(3) %>
+                            <%= f.label :payment,Post.payments_i18n[:qr], value: Post.payments.key(3) %>
+                         </div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-shower" aria-hidden="true"></i> <%= f.label :シャンプー・コンディショナー%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :toiletry, autofocus: true, placeholder: "例）シャンプーの種類やトリートメントの有無など", class: "form-control xs-2" %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> <%= f.label :タオル%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4">
+                            <%= f.radio_button :towel_stock, Post.towel_stocks.key(0), {:checked => true} %>
+                            <%= f.label :towel_stock, Post.towel_stocks_i18n[:available], value: Post.towel_stocks.key(0) %>
+                            <%= f.radio_button :towel_stock, Post.towel_stocks.key(1) %>
+                            <%= f.label :towel_stock,Post.towel_stocks_i18n[:no_exist], value: Post.towel_stocks.key(1) %>
+                          </div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-heart" aria-hidden="true"></i> <%= f.label :化粧水など%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :skin_product, autofocus: true, placeholder: "化粧水/メイク落としなどの有無", class: "form-control xs-2" %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-plug" aria-hidden="true"></i> <%= f.label :ドライヤー%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :hairdryer, autofocus: true, placeholder: "ドライヤーの有無/代数/風量", class: "form-control xs-2" %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fa fa-suitcase" aria-hidden="true"></i> <%= f.label :荷物の預け方%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :luggage, autofocus: true, class: "form-control xs-2" %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fas fa-camera"></i> <%= f.label :温泉の写真%>
+                          <div class ="pb-2 pt-2 pb-5 ml-4 mr-4"><%=f.file_field :image %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fas fa-camera"></i> <%= f.label :評価%>
+                           <div class ="pb-2 pt-2 pb-5 ml-5 mr-5"><class="form-group row" id="star"><%= f.hidden_field :star, id: :review_star %></div>
+                            <div class ="d-flex justify-content-end">
+                             <%= f.submit '投稿',class: "btn  btn-outline-secondary" %>
+                            </div>
+                        </th></tr>
+                     </tbody>
+                   </table>
+                 </div>
+               <%end%>
+           </div>
+        </div>
+     </div>
+   </div>
 
           <script>
             $('#star').empty()

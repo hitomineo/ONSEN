@@ -1,0 +1,157 @@
+<div class ="container">
+  <div class ="text-center mt-5 mb-5 pb-5 pt-5 ">
+    <%= image_tag 'good.png', width: '20%', height: '20%', class: "mt-5"%>
+  </div>
+    <% @favorite_posts.each do |post| %>
+      <div class ="row-col-8">
+          <div class ="mb-5 pb-5 row row-col-8", style="box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.5)">
+            <div class ="pl-5  pt-4 pl-2"><%= image_tag post.get_image(300,300) %>
+              <% if current_customer.email != "guest@example.com" %>
+                <div class ="text-right pt-4" id="like_buttons_<%= post.id %>">
+                  <%= render "public/likes/likes", post: post %>
+                </div>
+              <% end %>
+            </div>
+
+
+              <div class ="row mt-5 ml-5">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th>
+                        <i class="fas fa-pen"></i> 温泉名 /
+                          <th class="">
+                         <%= post.onsen_name %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-map-pin" aria-hidden="true"></i> 住所 /
+                          <th class="">
+                         <%= post.address %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                         <i class="fa fa-car" aria-hidden="true"></i> 駐車場 /
+                           <th class="">
+                          <%= post.parking_i18n %>
+                      </th>
+                     </tr>
+
+                    <tr>
+                      <th>
+                          <i class="fa fa-credit-card" aria-hidden="true"></i> 支払い方 /
+                            <th class="">
+                           <%= post.payment_i18n %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-shower" aria-hidden="true"></i> シャンプー/コンディショナー /
+                          <th class="">
+                         <%= post.toiletry %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> タオル有無 /
+                          <th class="">
+                         <%= post.towel_stock_i18n %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-heart" aria-hidden="true"></i> 化粧水/メイク落とし /
+                          <th class="">
+                         <%= post.skin_product %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-plug" aria-hidden="true"></i> ドライヤー(有無/風量) /
+                          <th class="">
+                         <%= post.hairdryer %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="fa fa-suitcase" aria-hidden="true"></i> 荷物の預け方 /
+                          <th class="">
+                         <%= post.luggage %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <i class="far fa-map"></i> 地図
+                            <th id="map-<%= post.id %>" style="width:150px;height:70px">
+                        </th>
+                    </tr>
+
+
+<!--星機能-->          <%= image_tag post.customer.customer_get_image(240,240), class: "rounded-circle",size: "30x30" %>
+                         <%= post.customer.name%>
+                           <div class ="pb-3"></div>
+                             <div id="star-rate<%= post.id%>"></div>
+                               <div class ="pb-3"></div>
+
+                          <script>
+                            $('#star-rate<%= post.id %>').empty();
+                            $('#star-rate<%= post.id%>').raty({
+                              size      : 36,
+                              starOff   : '<%= asset_path('star-off.png') %>',
+                              starOn    : '<%= asset_path('star-on.png') %>',
+                              half      : false,
+                              readOnly: true,
+                              score: '<%= post.star.nil? ? 0 :  post.star %>'
+                            });
+                          </script>
+
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>    
+    <% end %>
+</div>
+
+                     <script>
+                        function initMap(){
+                          // 地図の位置情報(緯度・経度)を取得
+                        <% @favorite_posts.each do |post| %>
+                        {
+                          let mapPosition = {lat: <%= post.latitude || 0 %> , lng: <%= post.longitude || 0 %> };
+                          let map = new google.maps.Map(document.getElementById("map-<%= post.id %>"), {
+                            zoom: 15,
+                            center: mapPosition
+                          });
+                          let transitLayer = new google.maps.TransitLayer();
+                          transitLayer.setMap(map);
+
+                          let contentString = '【住所】<%= post.address %>';
+                          let infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                          });
+
+                          let marker = new google.maps.Marker({
+                            position: mapPosition,
+                            map: map,
+                            title: contentString
+                          });
+
+                          marker.addListener('click', function(){
+                            infowindow.open(map, marker);
+                          });
+                        }<%end%>
+                        }
+                      </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+

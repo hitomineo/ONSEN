@@ -1,7 +1,4 @@
-
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%#= render "public/shared/error_messages", resource: resource %>
-
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <form class="bg-home d-flex align-items-center w-150 h-150">
               <div class="container my-5 py-5 my-5 py-5">
                 <%= render "public/shared/error_messages", resource: resource %>
@@ -11,10 +8,10 @@
                       <%= image_tag 'up.png', width: '55%', height: '55%',class: "mb-3" %>
                       </br>
                         <div class="form-group form-group-lg">
-                         <%= f.text_field :name, autocomplete: "name",placeholder:"ユーザーネーム" %></br>
+                         <%= f.text_field :name, autofocus: true, autocomplete: "name",placeholder:"ユーザーネーム" %></br>
                         </div>
                         <div class="form-group form-group-lg">
-                         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com" %></br>
+                         <%= f.email_field :email, autocomplete: "email",placeholder:"sample@example.com" %></br>
                         </div>
                         <div class="form-group form-group-lg">
                           <%= f.password_field :password, autocomplete: "current-password",placeholder:"6文字以上のパスワード" %>
@@ -26,7 +23,7 @@
                     <div class="text-center">
                         <%= f.submit "Sign up", class: "btn  btn-outline-secondary" %>
                     </div>
-      <%end%>
+    <%end%>
 
                   </div>
                 </div>

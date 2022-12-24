@@ -38,6 +38,9 @@ class Post < ApplicationRecord
   end
 
 
+  validates :onsen_name,:address,:parking,:payment,:toiletry,:towel_stock,:skin_product,:hairdryer,:luggage, presence: true
+
+
 
 
   def get_image(width, height)
@@ -47,9 +50,5 @@ class Post < ApplicationRecord
     end
       image.variant(resize_to_limit:[width, height]).processed
   end
-
-
-
-
 
 end

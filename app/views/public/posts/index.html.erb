@@ -1,24 +1,32 @@
-
 <div class ="container">
-  <div class ="mt-5 mb-5">
-    <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-3 my-lg-0 pb-5 justify-content-end' do |f| %>
-      <%= f.search_field :search, placeholder: "温泉名もしくは住所" %>
-      <%=f.submit 'Search', :address => nil,class: "btn  btn-outline-secondary ml-5 " %>
-    <%end%>
-  </div>
+    <div class ="col-12 mt-5 mb-5">
+      <%= form_with model: @post, url: posts_search_path, method: :get,  class: 'form-inline my-3 my-lg-0 pb-5 justify-content-end' do |f| %>
+        <%= f.search_field :search, placeholder: "温泉名もしくは住所" %>
+        <%=f.submit 'Search', :address => nil,class: "btn  btn-outline-secondary ml-5 " %>
+      <%end%>
+    </div>
 
 
-    <div class ="row">
+    <div class ="row-col-8">
       <% @posts.each do |post| %>
-        <div class ="col-5 lg-4 ml-5 mr-5 mb-5 pb-5", style="box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5)">
-          <div class ="justify-content-start pt-4 pl-3"> <%= post.customer.name%></div>
-            <div class ="text-center pt-4"><%= image_tag post.get_image(240,240) %></div>
-              <div class ="mt-5 ml-5 mr-5">
+        <div class ="mb-5 pb-5 row row-col-8", style="box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.5)">
+          <div class ="pl-5  pt-4 pl-2"><%= image_tag post.get_image(300,300) %>
+
+            <% if current_customer.email != "guest@example.com" %>
+              <div class ="text-right pt-4" id="like_buttons_<%= post.id %>">
+                <%= render "public/likes/likes", post: post %>
+              </div>
+            <% end %>
+          </div>
+
+
+              <div class ="row mt-5 ml-5">
                 <table class="table">
                   <tbody>
                     <tr>
                       <th>
                         <i class="fas fa-pen"></i> 温泉名 /
+                          <th class="">
                          <%= post.onsen_name %>
                       </th>
                     </tr>
@@ -26,6 +34,7 @@
                     <tr>
                       <th>
                         <i class="fa fa-map-pin" aria-hidden="true"></i> 住所 /
+                          <th class="">
                          <%= post.address %>
                       </th>
                     </tr>
@@ -33,20 +42,23 @@
                     <tr>
                       <th>
                          <i class="fa fa-car" aria-hidden="true"></i> 駐車場 /
+                           <th class="">
                           <%= post.parking_i18n %>
                       </th>
-                      </tr>
+                     </tr>
 
                     <tr>
                       <th>
                           <i class="fa fa-credit-card" aria-hidden="true"></i> 支払い方 /
+                            <th class="">
                            <%= post.payment_i18n %>
                       </th>
-                      </tr>
+                    </tr>
 
                     <tr>
                       <th>
                         <i class="fa fa-shower" aria-hidden="true"></i> シャンプー/コンディショナー /
+                          <th class="">
                          <%= post.toiletry %>
                       </th>
                     </tr>
@@ -54,6 +66,7 @@
                     <tr>
                       <th>
                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> タオル有無 /
+                          <th class="">
                          <%= post.towel_stock_i18n %>
                       </th>
                     </tr>
@@ -61,6 +74,7 @@
                     <tr>
                       <th>
                         <i class="fa fa-heart" aria-hidden="true"></i> 化粧水/メイク落とし /
+                          <th class="">
                          <%= post.skin_product %>
                       </th>
                     </tr>
@@ -68,6 +82,7 @@
                     <tr>
                       <th>
                         <i class="fa fa-plug" aria-hidden="true"></i> ドライヤー(有無/風量) /
+                          <th class="">
                          <%= post.hairdryer %>
                       </th>
                     </tr>
@@ -75,14 +90,25 @@
                     <tr>
                       <th>
                         <i class="fa fa-suitcase" aria-hidden="true"></i> 荷物の預け方 /
+                          <th class="">
                          <%= post.luggage %>
                       </th>
                     </tr>
 
+                    <tr>
+                      <th>
+                        <i class="far fa-map"></i> 地図
+                            <th id="map-<%= post.id %>" style="width:150px;height:70px">
+                        </th>
+                    </tr>
 
 
-<!--星機能-->
-                      <div id="star-rate<%= post.id%>">
+<!--星機能-->          <%= image_tag post.customer.customer_get_image(240,240), class: "rounded-circle",size: "30x30" %>
+                         <%= post.customer.name%>
+                           <div class ="pb-3"></div>
+                             <div id="star-rate<%= post.id%>"></div>
+                               <div class ="pb-3"></div>
+
                           <script>
                             $('#star-rate<%= post.id %>').empty();
                             $('#star-rate<%= post.id%>').raty({
@@ -94,22 +120,16 @@
                               score: '<%= post.star.nil? ? 0 :  post.star %>'
                             });
                           </script>
-                      </div>
 
                   </tbody>
                 </table>
               </div>
-
-              <div class ="ml-5">
-                <div id="map-<%= post.id %>" style="width:300px;height:150px "></div>
-              </div>
-
-                    <div class ="text-right pr-5" id="like_buttons_<%= post.id %>">
-                       <%= render "public/likes/likes", post: post %>
-                    </div>
-        </div>
+          </div>
       <% end %>
     </div>
+                <div class ="row justify-content-center mb-5 pb-5 mt-5 pt-5">
+                  <%= paginate @posts %>
+                </div>
 </div>
 
                      <script>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col3-md mt-5 mb-4">
+      <div class ="text-center"><%= image_tag 'kojinn.png', width: '50%', height: '50%', class: "mt-5"%></div>
+    </div>
+  </div>
+
+   <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class="table shadow-lg">
+        <tr>
+          <th class="table-active">会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+
+        <tr>
+          <th class="table-active">氏名</th>
+          <td><%= "#{@customer.name}" %></td>
+        </tr>
+
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+
+        <tr>
+          <th class="table-active">会員ステータス</th>
+          <% if @customer.is_deleted == true %>
+            <td class="text-secondary font-weight-bold">退会</td>
+          <% else %>
+            <td class="text-success font-weight-bold">有効</td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

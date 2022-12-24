@@ -19,3 +19,9 @@ ja:
       customer:
         signed_in: ""
         signed_out: ""
+
+  devise:
+    registrations:
+      customer:
+        signed_up: ""
+        signed_out: ""

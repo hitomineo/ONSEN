@@ -12,15 +12,18 @@
         <div class ="mb-5 pb-5 row row-col-8", style="box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.5)">
           <div class ="pl-5  pt-4 pl-2"><%= image_tag post.get_image(300,300) %>
 
-            <% if current_customer.email != "guest@example.com" %>
-              <div class ="text-right pt-4" id="like_buttons_<%= post.id %>">
-                <%= render "public/likes/likes", post: post %>
-              </div>
-            <% end %>
+          <div class ="text-left pt-4" ></div>
+            <div id="star-rate<%= post.id%>"></div>
+
+              <% if current_customer.email != "guest@example.com" %>
+                <div class ="text-right" id="like_buttons_<%= post.id %>">
+                  <%= render "public/likes/likes", post: post %>
+                </div>
+              <% end %>
           </div>
 
 
-              <div class ="row mt-5 ml-5">
+              <div class ="row mt-5 ml-5 pl-5 mr-3">
                 <table class="table">
                   <tbody>
                     <tr>
@@ -102,12 +105,11 @@
                         </th>
                     </tr>
 
+                      <%= image_tag post.customer.customer_get_image(240,240), class: "rounded-circle",size: "40x40" %>
+                        </br>
+                      <%= post.customer.name%>
+                        </br>
 
-<!--星機能-->          <%= image_tag post.customer.customer_get_image(240,240), class: "rounded-circle",size: "30x30" %>
-                         <%= post.customer.name%>
-                           <div class ="pb-3"></div>
-                             <div id="star-rate<%= post.id%>"></div>
-                               <div class ="pb-3"></div>
 
                           <script>
                             $('#star-rate<%= post.id %>').empty();

@@ -10,85 +10,74 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
 
-<!--public側でログインしたらこれを表示-->
-         <% if customer_signed_in? %>
-         <%# if controller_name != 'admin' %>
-          <!--<nav class="navbar navbar-expand-sm navbar-light mt-4 float-right ">-->
-              <ul class="navbar-nav">
-                <% if current_customer.email != "guest@example.com" %>
-                  <li>
-                     <%=link_to "投稿 /",customer_path(current_customer), class: 'text-dark nav-link text-nowrap text-light'  %>
-                  </li>
-                  <li>
-                    <%=link_to "マイページ /",customers_path, class: 'text-dark nav-link text-nowrap text-light'  %>
-                  </li>
-                  <li>
-                    <%= link_to"いいね一覧 /", favorites_customer_path(current_customer),class: 'text-dark nav-link text-nowrap text-light'  %>
-                  </li>
+      <!--public側でログインしたらこれを表示-->
+               <% if customer_signed_in? %>
+                    <ul class="navbar-nav">
+                      <% if current_customer.email != "guest@example.com" %>
+                        <li>
+                           <%=link_to "投稿 /",customer_path(current_customer), class: 'text-dark nav-link text-nowrap text-light'  %>
+                        </li>
+                        <li>
+                          <%=link_to "マイページ /",customers_path, class: 'text-dark nav-link text-nowrap text-light'  %>
+                        </li>
+                        <li>
+                          <%= link_to"いいね一覧 /", favorites_customer_path(current_customer),class: 'text-dark nav-link text-nowrap text-light'  %>
+                        </li>
+                      <% end %>
+                        <li>
+                          <%=link_to "投稿一覧 /",posts_path, class: 'text-dark nav-link text-nowrap text-light'  %>
+                        </li>
+                        <li>
+                          <%= link_to "温泉道について/ ", root_path, class: 'text-dark nav-link text-nowrap text-light'  %>
+                        </li>
+                        <li>
+                          <%=link_to "ログアウト",destroy_customer_session_path, class: 'text-dark nav-link text-nowrap text-light', method: :delete %>
+                        </li>
+                     </ul>
+      <!--public側でログインする前 -->
+                <% elsif admin_signed_in? %>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <%= link_to '会員登録情報 /',admin_customers_path, class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                        <li class="nav-item active">
+                          <%= link_to "温泉道について /", root_path,class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                        <li class="nav-item active ">
+                          <%=link_to "ログアウト",destroy_admin_session_path, class: 'text-dark nav-link text-nowrap text-light' , method: :delete %>
+                        </li>
+                    </ul>
+                <% else %>
+                    <ul class="navbar-nav">
+                      <% unless request.url.include?("admin") %>
+                        <li>
+                          <%=link_to "サインアップ /",new_customer_registration_path, class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                        <li>
+                          <%= link_to "ログイン /", new_customer_session_path ,class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                        <li>
+                          <%= link_to 'ゲストログイン（閲覧用） /', public_guest_sign_in_path, method: :post, class: ' login text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                      <% end %>
+                      <% if request.url.include?("admin") %>
+                        <li>
+                          <%=link_to "サインアップ /",new_admin_registration_path, class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                        <li>
+                          <%= link_to "ログイン /", new_admin_session_path ,class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                      <% end %>
+                        <li>
+                          <%= link_to "温泉道について", root_path,class: 'text-dark nav-link text-nowrap text-light' %>
+                        </li>
+                    </ul>
                 <% end %>
-                <li>
-                  <%=link_to "投稿一覧 /",posts_path, class: 'text-dark nav-link text-nowrap text-light'  %>
-                </li>
-                <li>
-                  <%= link_to "温泉道について/ ", root_path, class: 'text-dark nav-link text-nowrap text-light'  %>
-                </li>
-                <li>
-                  <%=link_to "ログアウト",destroy_customer_session_path, class: 'text-dark nav-link text-nowrap text-light', method: :delete %>
-                </li>
-              </ul>
-             <!--</nav>-->
-<!--public側でログインする前 -->
-
-          <% elsif admin_signed_in? %>
-              <!--<nav class="navbar navbar-expand-sm navbar-light mt-4 float-right ">-->
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <%= link_to '会員登録情報 /',admin_customers_path, class: 'text-dark nav-link text-nowrap text-light' %>
-                </li>
-                <li class="nav-item active">
-                  <%= link_to "温泉道について /", root_path,class: 'text-dark nav-link text-nowrap text-light' %>
-                </li>
-                <li class="nav-item active ">
-                  <%=link_to "ログアウト",destroy_admin_session_path, class: 'text-dark nav-link text-nowrap text-light' , method: :delete %>
-                </li>
-              </ul>
-             <!--</nav>-->
-          <% else %>
-            <!--<nav class="navbar navbar-expand-sm navbar-light mt-4 float-right ">-->
-              <ul class="navbar-nav">
-                <% unless request.url.include?("admin") %>
-                  <li>
-                    <%=link_to "サインアップ /",new_customer_registration_path, class: 'text-dark nav-link text-nowrap text-light' %>
-                  </li>
-                  <li>
-                    <%= link_to "ログイン /", new_customer_session_path ,class: 'text-dark nav-link text-nowrap text-light' %>
-                  </li>
-                  <li>
-                    <%= link_to 'ゲストログイン（閲覧用） /', public_guest_sign_in_path, method: :post, class: ' login text-dark nav-link text-nowrap text-light' %>
-                  </li>
-                <% end %>
-                <% if request.url.include?("admin") %>
-                  <li>
-                    <%=link_to "サインアップ /",new_admin_registration_path, class: 'text-dark nav-link text-nowrap text-light' %>
-                  </li>
-                  <li>
-                    <%= link_to "ログイン /", new_admin_session_path ,class: 'text-dark nav-link text-nowrap text-light' %>
-                  </li>
-                <% end %>
-                <li>
-                  <%= link_to "温泉道について", root_path,class: 'text-dark nav-link text-nowrap text-light' %>
-                </li>
-              </ul>
-             <!--</nav>-->
-
-
-
-          <% end %>
-          <%# end %>
-          </div>
+              </div>
           </div>
         </nav>
-      <!--</div>-->
+      </div>
+    </div>
 </header>
 
 

@@ -76,6 +76,12 @@
                      </th></tr>
 
                      <tr><th>
+                      <i class="fas fa-asterisk"></i> <%= f.label :温泉情報%>
+                      <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :detail, autofocus: true, class: "form-control xs-2" %></div>
+                     </th></tr>
+
+
+                     <tr><th>
                       <i class="fas fa-camera"></i> <%= f.label :温泉の写真%>
                       <div class ="pb-2 pt-2 pb-5 ml-4 mr-4"><%=f.file_field :image %></div>
                      </th></tr>

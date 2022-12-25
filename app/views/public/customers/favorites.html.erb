@@ -91,6 +91,14 @@
 
                     <tr>
                       <th>
+                        <i class="fas fa-asterisk"></i> 温泉情報 /
+                          <th class="">
+                         <%= post.detail %>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>
                         <i class="far fa-map"></i> 地図
                             <th id="map-<%= post.id %>" style="width:150px;height:70px">
                         </th>
@@ -119,7 +127,7 @@
                 </table>
               </div>
           </div>
-      </div>    
+      </div>
     <% end %>
 </div>
 

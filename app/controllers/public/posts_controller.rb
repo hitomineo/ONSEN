@@ -68,7 +68,7 @@ class Public::PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:toiletry,:skin_product,:hairdryer,:luggage,:address,:latitude,
-                                  :longitude,:onsen_name,:parking, :payment, :towel_stock,:image,:star)
+                                  :longitude,:onsen_name,:parking, :payment, :towel_stock,:image,:star,:detail)
   end
 
 end

@@ -1,5 +1,5 @@
 <div class ="container">
-   <div class ="row-col pl-5 ml-5">
+   <div class ="row-col pl-5 ml-5 pt-5 mt-3">
      <%= image_tag @customer.customer_get_image(350,350), class: "rounded-circle pb-2 mb-5",size: "80x80" %>
        <%= @customer.name%>
          <%= link_to edit_customer_path(@customer) do %>
@@ -84,6 +84,11 @@
                         <tr><th>
                           <i class="fa fa-suitcase" aria-hidden="true"></i> <%= f.label :荷物の預け方%>
                           <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :luggage, autofocus: true, class: "form-control xs-2" %></div>
+                        </th></tr>
+
+                        <tr><th>
+                          <i class="fas fa-asterisk"></i> <%= f.label :温泉情報%>
+                          <div class ="pb-2 pt-2 ml-4 mr-4"><%= f.text_field :detail, autofocus: true, placeholder: "温泉での感想 / 例)温泉の成分など", class: "form-control xs-2" %></div>
                         </th></tr>
 
                         <tr><th>

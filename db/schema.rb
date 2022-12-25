@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2022_12_22_043904) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.string "comment"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -77,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_12_22_043904) do
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "onsen_name", null: false
+    t.string "detail"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
